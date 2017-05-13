@@ -20840,7 +20840,7 @@ var App = function (_React$Component) {
     return App;
 }(_react2.default.Component);
 
-_reactDom2.default.render(App, document.getElementById('app'));
+_reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('app'));
 
 },{"./components/email_form.js":173,"react":171,"react-dom":28}],173:[function(require,module,exports){
 'use strict';
@@ -20854,6 +20854,18 @@ var _createClass = function () { function defineProperties(target, props) { for 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _form_input = require('./form_input.js');
+
+var _form_input2 = _interopRequireDefault(_form_input);
+
+var _form_button = require('./form_button.js');
+
+var _form_button2 = _interopRequireDefault(_form_button);
+
+var _form_text_field = require('./form_text_field.js');
+
+var _form_text_field2 = _interopRequireDefault(_form_text_field);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20874,21 +20886,30 @@ var EmailForm = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (EmailForm.__proto__ || Object.getPrototypeOf(EmailForm)).call(this, props));
 
         _this.state = {
-            name: '',
-            email: '',
+            to: '',
+            cc: '',
+            bcc: '',
+            subject: '',
             message: ''
         };
 
-        _this.type = _this.type.bind(_this);
+        _this.onChange = _this.onChange.bind(_this);
+        _this.onClick = _this.onClick.bind(_this);
         _this.sendEmail = _this.sendEmail.bind(_this);
 
         return _this;
     }
 
     _createClass(EmailForm, [{
-        key: 'type',
-        value: function type(e) {
+        key: 'onChange',
+        value: function onChange(e) {
             this.setState(_defineProperty({}, e.target.name, e.target.value));
+        }
+    }, {
+        key: 'onClick',
+        value: function onClick() {
+            console.log(this.state);
+            //this.sendEmail();
         }
     }, {
         key: 'sendEmail',
@@ -20898,111 +20919,50 @@ var EmailForm = function (_React$Component) {
                 dataType: "json",
                 url: "/api/email/store",
                 data: {
-                    name: this.state.name,
-                    email: this.state.email,
+                    to: this.state.to,
+                    cc: this.state.cc,
+                    bcc: this.state.bcc,
+                    subject: this.state.subject,
                     message: this.state.message
                 },
                 success: function () {
-                    this.popup('Message sent');
+                    alert('Email Sent');
                     this.setState({ name: '', email: '', message: '' });
                 }.bind(this),
                 error: function () {
-                    this.popup('Error sending message. Please try again');
+                    alert('Error sending message. Please try again');
                 }.bind(this)
             });
-        }
-    }, {
-        key: 'popup',
-        value: function popup(message) {
-            var response = $('<span>' + message + '</span>');
-            Materialize.toast(response, 5000);
         }
     }, {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
                 'div',
-                null,
-                _react2.default.createElement(
-                    'h4',
-                    { className: 'cyan-text text-darken-3' },
-                    'Contact Us'
-                ),
-                _react2.default.createElement(
-                    'p',
-                    null,
-                    'Small Sydney based web development shop that can help you build the website you want: '
-                ),
+                { className: 'panel' },
                 _react2.default.createElement(
                     'div',
-                    { className: 'row' },
+                    { className: 'panel-body' },
+                    _react2.default.createElement(
+                        'h3',
+                        null,
+                        'Email Form'
+                    ),
+                    _react2.default.createElement(
+                        'p',
+                        null,
+                        'You can send to multiple email addresses but having them comma separated.'
+                    ),
                     _react2.default.createElement(
                         'div',
-                        { className: 'input-field col s6' },
-                        _react2.default.createElement(
-                            'i',
-                            { className: 'material-icons prefix' },
-                            'account_circle'
-                        ),
-                        _react2.default.createElement(
-                            'label',
-                            { htmlFor: 'name' },
-                            'Name'
-                        ),
-                        _react2.default.createElement('input', { name: 'name', type: 'text', className: 'validate', value: this.state.name, onChange: this.type })
-                    )
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'row' },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'input-field col s6' },
-                        _react2.default.createElement(
-                            'i',
-                            { className: 'material-icons prefix' },
-                            'email'
-                        ),
-                        _react2.default.createElement(
-                            'label',
-                            { htmlFor: 'email' },
-                            'Email'
-                        ),
-                        _react2.default.createElement('input', { name: 'email', type: 'email', className: 'validate', value: this.state.email, onChange: this.type })
-                    )
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'row' },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'input-field col s6' },
-                        _react2.default.createElement(
-                            'i',
-                            { className: 'material-icons prefix' },
-                            'mode_edit'
-                        ),
-                        _react2.default.createElement(
-                            'label',
-                            { htmlFor: 'message' },
-                            'Message'
-                        ),
-                        _react2.default.createElement('textarea', { name: 'message', className: 'materialize-textarea', value: this.state.message, onChange: this.type })
-                    )
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'row' },
-                    _react2.default.createElement(
-                        'button',
-                        { onClick: this.sendEmail, className: 'btn waves-effect waves-light', name: 'action' },
-                        'Email',
-                        _react2.default.createElement(
-                            'i',
-                            { className: 'material-icons right' },
-                            'send'
-                        )
-                    )
+                        { className: 'form-group' },
+                        _react2.default.createElement(_form_input2.default, { onChange: this.onChange, value: this.state.to, name: 'to', label: 'To:', placeholder: 'To Email Address' }),
+                        _react2.default.createElement(_form_input2.default, { onChange: this.onChange, value: this.state.cc, name: 'cc', label: 'CC:', placeholder: 'CC Email Address' }),
+                        _react2.default.createElement(_form_input2.default, { onChange: this.onChange, value: this.state.bcc, name: 'bcc', label: 'BCC:', placeholder: 'BCC Email Address' }),
+                        _react2.default.createElement(_form_input2.default, { onChange: this.onChange, value: this.state.subject, name: 'subject', label: 'Subject:', placeholder: 'Subject' }),
+                        _react2.default.createElement(_form_text_field2.default, { onChange: this.onChange, value: this.state.message, name: 'message', label: 'Message:', placeholder: 'Message Text' })
+                    ),
+                    _react2.default.createElement(_form_button2.default, { onClick: this.onClick, id: 'submit', value: 'Send Email' })
                 )
             );
         }
@@ -21012,5 +20972,167 @@ var EmailForm = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = EmailForm;
+
+},{"./form_button.js":174,"./form_input.js":175,"./form_text_field.js":176,"react":171}],174:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var FormButton = function (_React$Component) {
+    _inherits(FormButton, _React$Component);
+
+    function FormButton(props) {
+        _classCallCheck(this, FormButton);
+
+        return _possibleConstructorReturn(this, (FormButton.__proto__ || Object.getPrototypeOf(FormButton)).call(this, props));
+    }
+
+    _createClass(FormButton, [{
+        key: "render",
+        value: function render() {
+            return _react2.default.createElement(
+                "div",
+                null,
+                _react2.default.createElement(
+                    "button",
+                    { onClick: this.props.onClick, className: "btn btn-primary form-control", name: "action" },
+                    this.props.value
+                )
+            );
+        }
+    }]);
+
+    return FormButton;
+}(_react2.default.Component);
+
+exports.default = FormButton;
+
+},{"react":171}],175:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var FormInput = function (_React$Component) {
+    _inherits(FormInput, _React$Component);
+
+    function FormInput(props) {
+        _classCallCheck(this, FormInput);
+
+        return _possibleConstructorReturn(this, (FormInput.__proto__ || Object.getPrototypeOf(FormInput)).call(this, props));
+    }
+
+    _createClass(FormInput, [{
+        key: "render",
+        value: function render() {
+            return _react2.default.createElement(
+                "div",
+                null,
+                _react2.default.createElement(
+                    "label",
+                    null,
+                    this.props.label
+                ),
+                _react2.default.createElement("input", { name: this.props.name,
+                    type: "text",
+                    className: "form-control",
+                    placeholder: this.props.placeholder,
+                    value: this.props.value,
+                    onChange: this.props.onChange })
+            );
+        }
+    }]);
+
+    return FormInput;
+}(_react2.default.Component);
+
+exports.default = FormInput;
+
+},{"react":171}],176:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var FormTextField = function (_React$Component) {
+    _inherits(FormTextField, _React$Component);
+
+    function FormTextField(props) {
+        _classCallCheck(this, FormTextField);
+
+        return _possibleConstructorReturn(this, (FormTextField.__proto__ || Object.getPrototypeOf(FormTextField)).call(this, props));
+    }
+
+    _createClass(FormTextField, [{
+        key: "render",
+        value: function render() {
+            return _react2.default.createElement(
+                "div",
+                null,
+                _react2.default.createElement(
+                    "label",
+                    null,
+                    this.props.label
+                ),
+                _react2.default.createElement("textarea", { type: "text",
+                    name: this.props.name,
+                    className: "form-control",
+                    placeholder: this.props.placeholder,
+                    value: this.props.value,
+                    onChange: this.props.onChange })
+            );
+        }
+    }]);
+
+    return FormTextField;
+}(_react2.default.Component);
+
+exports.default = FormTextField;
 
 },{"react":171}]},{},[172]);

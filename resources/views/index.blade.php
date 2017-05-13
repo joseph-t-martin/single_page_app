@@ -7,18 +7,18 @@
 
         <title>Single Page App</title>
 
+        <link href="/css/app.css" rel="stylesheet">
+
         <script src="/assets/js/libraries/react.js"></script>
         <script src="/assets/js/libraries/react-dom.js"></script>
         <script src="/assets/js/libraries/browser.min.js"></script>
         <script src="/assets/js/libraries/ReactRouter.min.js"></script>
 
         <script src="/assets/js/libraries/jquery.min.js"></script>
-        <script src=/assets/js/libraries/remarkable.min.js"></script>
-
     </head>
     <body>
         <div id="app"></div>
     </body>
     <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
-    <script src="/assets/js/bundle.js"></script>
+    <script src="/js/bundle.js"></script>
 </html>

@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
 import EmailForm from './components/email_form.js';
 
 class App extends React.Component {
@@ -21,4 +20,4 @@ class App extends React.Component {
     }
 }
 
-ReactDOM.render(App, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('app'));

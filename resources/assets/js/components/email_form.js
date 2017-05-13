@@ -1,23 +1,35 @@
 import React from 'react';
 
+import FormInput from './form_input.js';
+import FormButton from './form_button.js';
+import FormTextField from './form_text_field.js';
+
 class EmailForm extends React.Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
-            name : '',
-            email : '',
-            message : '',
+            to : '',
+            cc : '',
+            bcc : '',
+            subject : '',
+            message : ''
         };
 
-        this.type = this.type.bind(this);
+        this.onChange = this.onChange.bind(this);
+        this.onClick = this.onClick.bind(this);
         this.sendEmail = this.sendEmail.bind(this);
 
     };
 
-    type(e){
+    onChange(e){
         this.setState({[e.target.name]: e.target.value});
+    };
+
+    onClick() {
+        console.log(this.state);
+        //this.sendEmail();
     };
 
     sendEmail() {
@@ -26,58 +38,37 @@ class EmailForm extends React.Component {
             dataType: "json",
             url: "/api/email/store",
             data: {
-                name: this.state.name,
-                email: this.state.email,
-                message: this.state.message
+                to: this.state.to,
+                cc: this.state.cc,
+                bcc: this.state.bcc,
+                subject: this.state.subject,
+                message: this.state.message,
             },
             success: function() {
-                this.popup('Message sent');
+                alert('Email Sent');
                 this.setState({name: '', email: '', message: ''});
             }.bind(this),
             error: function() {
-                this.popup('Error sending message. Please try again');
+                alert('Error sending message. Please try again');
             }.bind(this),
         });
     };
 
-    popup(message) {
-        let response = $('<span>' + message + '</span>');
-        Materialize.toast(response, 5000);
-    }
-
     render() {
         return (
-            <div>
-                <h4 className="cyan-text text-darken-3">Contact Us</h4>
-
-                <p>Small Sydney based web development shop that can help you build the website you want: </p>
-
-                    <div className="row">
-                        <div className="input-field col s6">
-                            <i className="material-icons prefix">account_circle</i>
-                            <label htmlFor="name">Name</label>
-                            <input name="name" type="text" className="validate" value={this.state.name} onChange={this.type} />
-                        </div>
+            <div className="panel">
+                <div className="panel-body">
+                    <h3>Email Form</h3>
+                    <p>You can send to multiple email addresses but having them comma separated.</p>
+                    <div className="form-group">
+                        <FormInput onChange={this.onChange} value={this.state.to} name="to" label="To:" placeholder="To Email Address"/>
+                        <FormInput onChange={this.onChange} value={this.state.cc} name="cc" label="CC:" placeholder="CC Email Address"/>
+                        <FormInput onChange={this.onChange} value={this.state.bcc} name="bcc" label="BCC:" placeholder="BCC Email Address"/>
+                        <FormInput onChange={this.onChange} value={this.state.subject} name="subject" label="Subject:" placeholder="Subject"/>
+                        <FormTextField onChange={this.onChange} value={this.state.message} name="message" label="Message:" placeholder="Message Text"/>
                     </div>
-                    <div className="row">
-                        <div className="input-field col s6">
-                            <i className="material-icons prefix">email</i>
-                            <label htmlFor="email">Email</label>
-                            <input name="email" type="email" className="validate" value={this.state.email} onChange={this.type} />
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="input-field col s6">
-                            <i className="material-icons prefix">mode_edit</i>
-                            <label htmlFor="message">Message</label>
-                            <textarea name="message" className="materialize-textarea" value={this.state.message} onChange={this.type} />
-                        </div>
-                    </div>
-                    <div className="row">
-                        <button onClick={this.sendEmail} className="btn waves-effect waves-light" name="action">Email
-                            <i className="material-icons right">send</i>
-                        </button>
-                    </div>
+                    <FormButton onClick={this.onClick} id="submit" value="Send Email"/>
+                </div>
             </div>
         )
     }
