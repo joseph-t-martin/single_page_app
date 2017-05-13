@@ -28,15 +28,14 @@ class EmailForm extends React.Component {
     };
 
     onClick() {
-        console.log(this.state);
-        //this.sendEmail();
+        this.sendEmail();
     };
 
     sendEmail() {
         $.ajax({
             type: "POST",
             dataType: "json",
-            url: "/api/email/store",
+            url: "/api/email/send",
             data: {
                 to: this.state.to,
                 cc: this.state.cc,
@@ -59,7 +58,7 @@ class EmailForm extends React.Component {
             <div className="panel">
                 <div className="panel-body">
                     <h3>Email Form</h3>
-                    <p>You can send to multiple email addresses but having them comma separated.</p>
+                    <p>You can send to multiple email addresses by having them comma separated.</p>
                     <div className="form-group">
                         <FormInput onChange={this.onChange} value={this.state.to} name="to" label="To:" placeholder="To Email Address"/>
                         <FormInput onChange={this.onChange} value={this.state.cc} name="cc" label="CC:" placeholder="CC Email Address"/>

@@ -20908,8 +20908,7 @@ var EmailForm = function (_React$Component) {
     }, {
         key: 'onClick',
         value: function onClick() {
-            console.log(this.state);
-            //this.sendEmail();
+            this.sendEmail();
         }
     }, {
         key: 'sendEmail',
@@ -20917,7 +20916,7 @@ var EmailForm = function (_React$Component) {
             $.ajax({
                 type: "POST",
                 dataType: "json",
-                url: "/api/email/store",
+                url: "/api/email/send",
                 data: {
                     to: this.state.to,
                     cc: this.state.cc,
@@ -20951,7 +20950,7 @@ var EmailForm = function (_React$Component) {
                     _react2.default.createElement(
                         'p',
                         null,
-                        'You can send to multiple email addresses but having them comma separated.'
+                        'You can send to multiple email addresses by having them comma separated.'
                     ),
                     _react2.default.createElement(
                         'div',

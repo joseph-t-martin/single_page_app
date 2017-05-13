@@ -15,6 +15,5 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::post('/', 'EmailController@index');
-Route::post('/api/email/send', 'EmailController@store');
+Route::post('/api/email/send', 'EmailController@send');
 
