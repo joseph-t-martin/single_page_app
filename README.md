@@ -19,6 +19,8 @@ And based on the data given will send an email.
 The React code for the frontend are located in resources/assets/js/ and uses Gulp to compile it into bundle.js
 
 ## Installation
+Please note: This does assume you have php and composer installed on your machine. You may also need to enable extra php extensions in order for the composer install command to work.
+
 - git clone git@github.com:joseph-t-martin/single_page_app.git
 - cd single_page_app/
 - composer install
