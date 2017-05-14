@@ -32,4 +32,4 @@ Please note: This does assume you have php and composer installed on your machin
 ## Additional Work
 - Log message to the database so that we have a copy of all emails being send.
 - Logging so that if either of the message clients valid to send to can investigate as to why.
-- Change Javascipt reponses to be pretty messages rather than just alerts.
+- Change Javascipt responses to be pretty messages rather than just alerts.
