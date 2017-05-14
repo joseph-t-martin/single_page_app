@@ -19,6 +19,12 @@ And based on the data given will send an email.
 The React code for the frontend are located in resources/assets/js/ and uses Gulp to compile it into bundle.js
 
 ## Installation
+- git clone git@github.com:joseph-t-martin/single_page_app.git
+- cd single_page_app/
+- composer install
+- cp .env.example .env
+- php artisan key:generate
+- php artisan serve
 
 ## Additional Work
 - Move API keys to .env files rather that hardcoded.
