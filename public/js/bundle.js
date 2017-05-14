@@ -20877,6 +20877,9 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+/**
+ * Email form component that sends an email to a user
+ */
 var EmailForm = function (_React$Component) {
     _inherits(EmailForm, _React$Component);
 
@@ -20896,7 +20899,6 @@ var EmailForm = function (_React$Component) {
         _this.onChange = _this.onChange.bind(_this);
         _this.onClick = _this.onClick.bind(_this);
         _this.sendEmail = _this.sendEmail.bind(_this);
-
         return _this;
     }
 
@@ -20908,7 +20910,11 @@ var EmailForm = function (_React$Component) {
     }, {
         key: 'onClick',
         value: function onClick() {
-            this.sendEmail();
+            if (this.state.to.trim() !== '' && this.state.to.trim() !== '' && this.state.to.trim() !== '') {
+                this.sendEmail();
+            } else {
+                alert('Missing required fields');
+            }
         }
     }, {
         key: 'sendEmail',
@@ -20924,12 +20930,17 @@ var EmailForm = function (_React$Component) {
                     subject: this.state.subject,
                     message: this.state.message
                 },
-                success: function () {
-                    alert('Email Sent');
-                    this.setState({ name: '', email: '', message: '' });
+                success: function (data) {
+                    console.log(data.result);
+                    if (data.result === 'success') {
+                        alert('Email Sent');
+                        //this.setState({to: '', cc: '', bcc: '', subject: '', message: ''});
+                    } else {
+                        alert('Unfortunately the email could not be sent at this time');
+                    }
                 }.bind(this),
                 error: function () {
-                    alert('Error sending message. Please try again');
+                    alert('Error sending message. Please ensure all email addresses are valid');
                 }.bind(this)
             });
         }
@@ -20955,11 +20966,11 @@ var EmailForm = function (_React$Component) {
                     _react2.default.createElement(
                         'div',
                         { className: 'form-group' },
-                        _react2.default.createElement(_form_input2.default, { onChange: this.onChange, value: this.state.to, name: 'to', label: 'To:', placeholder: 'To Email Address' }),
+                        _react2.default.createElement(_form_input2.default, { onChange: this.onChange, value: this.state.to, name: 'to', label: 'To: *', placeholder: 'To Email Address' }),
                         _react2.default.createElement(_form_input2.default, { onChange: this.onChange, value: this.state.cc, name: 'cc', label: 'CC:', placeholder: 'CC Email Address' }),
                         _react2.default.createElement(_form_input2.default, { onChange: this.onChange, value: this.state.bcc, name: 'bcc', label: 'BCC:', placeholder: 'BCC Email Address' }),
-                        _react2.default.createElement(_form_input2.default, { onChange: this.onChange, value: this.state.subject, name: 'subject', label: 'Subject:', placeholder: 'Subject' }),
-                        _react2.default.createElement(_form_text_field2.default, { onChange: this.onChange, value: this.state.message, name: 'message', label: 'Message:', placeholder: 'Message Text' })
+                        _react2.default.createElement(_form_input2.default, { onChange: this.onChange, value: this.state.subject, name: 'subject', label: 'Subject: *', placeholder: 'Subject' }),
+                        _react2.default.createElement(_form_text_field2.default, { onChange: this.onChange, value: this.state.message, name: 'message', label: 'Message: *', placeholder: 'Message Text' })
                     ),
                     _react2.default.createElement(_form_button2.default, { onClick: this.onClick, id: 'submit', value: 'Send Email' })
                 )
@@ -20993,6 +21004,9 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+/**
+ * Provides a html button with basic form styling
+ */
 var FormButton = function (_React$Component) {
     _inherits(FormButton, _React$Component);
 
@@ -21043,6 +21057,9 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+/**
+ * Provides a html input with basic form styling
+ */
 var FormInput = function (_React$Component) {
     _inherits(FormInput, _React$Component);
 
@@ -21099,6 +21116,9 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+/**
+ * Provides a html text area with basic form styling
+ */
 var FormTextField = function (_React$Component) {
     _inherits(FormTextField, _React$Component);
 

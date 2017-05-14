@@ -1,5 +1,8 @@
 import React from 'react';
 
+/**
+ * Provides a html text area with basic form styling
+ */
 class FormTextField extends React.Component {
 
     constructor(props) {

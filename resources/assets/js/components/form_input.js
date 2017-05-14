@@ -1,5 +1,8 @@
 import React from 'react';
 
+/**
+ * Provides a html input with basic form styling
+ */
 class FormInput extends React.Component {
 
     constructor(props) {

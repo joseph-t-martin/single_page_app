@@ -1,5 +1,8 @@
 import React from 'react';
 
+/**
+ * Provides a html button with basic form styling
+ */
 class FormButton extends React.Component {
 
     constructor(props) {
