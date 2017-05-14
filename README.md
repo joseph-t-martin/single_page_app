@@ -25,11 +25,11 @@ Please note: This does assume you have php and composer installed on your machin
 - cd single_page_app/
 - composer install
 - cp .env.example .env
+- Edit the .env file and set the SendGrid and MailGun api keys
 - php artisan key:generate
 - php artisan serve
 
 ## Additional Work
-- Move API keys to .env files rather that hardcoded.
 - Log message to the database so that we have a copy of all emails being send.
 - Logging so that if either of the message clients valid to send to can investigate as to why.
 - Change Javascipt reponses to be pretty messages rather than just alerts.
