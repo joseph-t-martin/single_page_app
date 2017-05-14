@@ -52,7 +52,7 @@ class EmailForm extends React.Component {
                 console.log(data.result);
                 if (data.result === 'success') {
                     alert('Email Sent');
-                    //this.setState({to: '', cc: '', bcc: '', subject: '', message: ''});
+                    this.setState({to: '', cc: '', bcc: '', subject: '', message: ''});
                 } else {
                     alert('Unfortunately the email could not be sent at this time')
                 }
